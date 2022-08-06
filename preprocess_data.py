@@ -58,7 +58,7 @@ def calculate_cosine_similarity(vectors) -> None:
 
 
 def create_file(data, filename: str) -> None:
-    pickle.dump(data, open(f"data\\{filename}", "wb"))
+    pickle.dump(data, open(f"data/{filename}", "wb"))
 
 
 def create_new_df(movies: pd.DataFrame) -> None:
