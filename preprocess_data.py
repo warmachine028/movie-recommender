@@ -47,7 +47,7 @@ def apply_stemming(movies: pd.DataFrame) -> None:
 
 
 def vectorize(movies: pd.DataFrame):
-    cv = CountVectorizer(max_features=10_000, stop_words="english")
+    cv = CountVectorizer(max_features=5000, stop_words="english")
     vectors = cv.fit_transform(movies["tags"]).toarray()
     return vectors
 
