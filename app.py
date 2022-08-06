@@ -4,6 +4,7 @@ import requests
 from os import environ as env
 
 from dotenv import load_dotenv
+from PIL import Image
 
 load_dotenv()
 
@@ -34,11 +35,21 @@ def recommend(movie):
     ]
 
 
-st.title("Movie Recommender")
-selected_movie = st.selectbox("Select a movie", data["title"].values)
-if st.button("Recommend"):
-    recommendations = recommend(selected_movie)
-    for (poster, title), column in zip(recommendations, st.columns(5)):
-        with column:
-            st.text(title)
-            st.image(poster)
+def main():
+    st.set_page_config(
+        page_title="Movies Recommender", 
+        page_icon=Image.open("assets/logo.png"),
+        layout='wide'
+    )
+    st.title("Movie Recommender")
+    selected_movie = st.selectbox("Select a movie", data["title"].values)
+    if st.button("Recommend"):
+        recommendations = recommend(selected_movie)
+        for (poster, title), column in zip(recommendations, st.columns(5)):
+            with column:
+                st.text(title)
+                st.image(poster)
+
+
+if __name__ == "__main__":
+    main()
