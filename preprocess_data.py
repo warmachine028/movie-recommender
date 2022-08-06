@@ -3,7 +3,6 @@ preprocess_data.py: Functions for pre_processing of data
 """
 
 import pickle
-import numpy as np
 import pandas as pd
 import ast  # Abstract Syntax Tree
 from nltk.stem.porter import PorterStemmer
@@ -75,6 +74,7 @@ def main():
     credits = pd.read_csv("data/tmdb_5000_credits.csv")
     movies = pd.read_csv("data/tmdb_5000_movies.csv")
     data = movies.merge(credits, on="title")
+    print(data.title)
     data = data[["id", "title", "overview", "genres", "keywords", "cast", "crew"]]
     data.dropna(inplace=True)
     apply_function(data)
