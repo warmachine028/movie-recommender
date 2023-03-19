@@ -11,7 +11,7 @@
 
 ## What's new?
 
--   Everything
+-   Changed Deployment from Heroku to Streamlit
 
 ## Table of Contents
 
@@ -61,6 +61,11 @@
 # License
 
 -   see [LICENSE]
+
+# Upcomming
+
+-   Addition of latest movie database
+-   More Movie info on clicking Movie cards
 
 **Pritam, 2023**
 
