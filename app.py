@@ -45,7 +45,6 @@ def main():
         page_title="Movies Recommender", 
         page_icon=Image.open("assets/logo.png"),
         layout='wide',
-
     )
     st.title("Movie Recommender")
     selected_movie = st.selectbox("Select a movie", data["title"].values)
