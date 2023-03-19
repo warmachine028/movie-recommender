@@ -11,8 +11,7 @@ DATA = "data/movies.pkl"
 SIMILARITIES = "data/similarity.pkl"
 
 if not os.path.isfile(DATA) and not os.path.isfile(SIMILARITIES):
-    os.system("echo Hello")
-    os.system("pip install pandas")
+    os.system("pip install -r requirements.txt")
     os.system("python preprocess_data.py")
 
 data, similarities = pickle.load(open(DATA, "rb")), pickle.load(open(SIMILARITIES, "rb"))
