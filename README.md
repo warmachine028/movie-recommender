@@ -1,4 +1,4 @@
-    updated: Saturday, 6th August 2022
+    updated: Sunday, 19th March 2023
 
 <div align=center>
     <a href="https://movies-recommender-pritam.herokuapp.com">
@@ -64,6 +64,6 @@
 
 - see [LICENSE]
 
-**Pritam, 2022**
+**Pritam, 2023**
 
 [license]: https://github.com/warmachine028/movie-recommender/blob/main/LICENSE

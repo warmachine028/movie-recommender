@@ -1,15 +1,18 @@
 import streamlit as st
 import pickle
 import requests
+import os
 from os import environ as env
-
 from dotenv import load_dotenv
 from PIL import Image
 
 load_dotenv()
+DATA = "data/movies.pkl"
+SIMILARITIES = "data/similarity.pkl"
+if not os.path.isfile(DATA) and os.path.isfile(SIMILARITIES):
+    os.system("python preprocess_data.py")
 
-data = pickle.load(open("data/movies.pkl", "rb"))
-similarities = pickle.load(open("data/similarity.pkl", "rb"))
+data, similarities = pickle.load(open(DATA, "rb")), pickle.load(open(SIMILARITIES, "rb"))
 api = (
     "https://api.themoviedb.org/3/movie/{}" f'?api_key={env["API_KEY"]}&language=en-US'
 )
@@ -39,16 +42,16 @@ def main():
     st.set_page_config(
         page_title="Movies Recommender", 
         page_icon=Image.open("assets/logo.png"),
-        layout='wide'
+        layout='wide',
+
     )
     st.title("Movie Recommender")
     selected_movie = st.selectbox("Select a movie", data["title"].values)
-    if st.button("Recommend"):
-        recommendations = recommend(selected_movie)
-        for (poster, title), column in zip(recommendations, st.columns(5)):
-            with column:
-                st.text(title)
-                st.image(poster)
+    recommendations = recommend(selected_movie)
+    for (poster, title), column in zip(recommendations, st.columns(5)):
+        with column:
+            st.text(title)
+            st.image(poster)
 
 
 if __name__ == "__main__":
