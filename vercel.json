@@ -1,0 +1,7 @@
+{
+	"installCommand": "python -m pip install --upgrade pip && pip install -r requirements.txt",
+	"functions": {
+		"app.py": {},
+		"preprocess_data.py": {}
+	}
+}
