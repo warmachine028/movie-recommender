@@ -48,12 +48,12 @@ def main():
     )
     st.title("Movie Recommender")
     selected_movie = st.selectbox("Select a movie", data["title"].values)
-    if st.button("Recommend"):
-        recommendations = recommend(selected_movie)
-        for (poster, title), column in zip(recommendations, st.columns(5)):
-            with column:
-                st.text(title)
-                st.image(poster)
+    first_movie = [data["title"].values][0] 
+    recommendations = recommend(selected_movie if st.button("Recommend") else first_movie)
+    for (poster, title), column in zip(recommendations, st.columns(5)):
+        with column:
+            st.text(title)
+            st.image(poster)
 
 
 if __name__ == "__main__":
