@@ -64,7 +64,6 @@
 
 # Upcomming
 
--   Addition of latest movie database
 -   More Movie info on clicking Movie cards
 
 **Pritam, 2023**

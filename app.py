@@ -33,7 +33,6 @@ def recommend(movie):
     movies = enumerate(distances)
     recommended_movies = sorted(movies, reverse=True, key=lambda m: m[1])
     top_5_recommendations = recommended_movies[1:6]
-
     return [
         (fetch_poster(data.iloc[_id].id), data.iloc[_id].title)
         for _id, _ in top_5_recommendations
@@ -48,7 +47,7 @@ def main():
     )
     st.title("Movie Recommender")
     selected_movie = st.selectbox("Select a movie", data["title"].values)
-    first_movie = [data["title"].values][0] 
+    first_movie = [data["title"].values][0]
     recommendations = recommend(selected_movie if st.button("Recommend") else first_movie)
     for (poster, title), column in zip(recommendations, st.columns(5)):
         with column:
