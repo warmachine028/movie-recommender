@@ -14,6 +14,8 @@ if not os.path.isfile(DATA) and not os.path.isfile(SIMILARITIES):
     print("Loading Modules")
     os.system("pip install -r requirements.txt")
     os.system("python preprocess_data.py")
+else:
+    print("Modules already Loaded")
 
 data, similarities = pickle.load(open(DATA, "rb")), pickle.load(open(SIMILARITIES, "rb"))
 api = (

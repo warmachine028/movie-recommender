@@ -4,3 +4,4 @@ venv
 *.pkl
 __pycache__/
 pyvenv.cfg
+.ipynb_checkpoints/
