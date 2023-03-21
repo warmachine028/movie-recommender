@@ -11,6 +11,7 @@ DATA = "data/movies.pkl"
 SIMILARITIES = "data/similarity.pkl"
 
 if not os.path.isfile(DATA) and not os.path.isfile(SIMILARITIES):
+    print("Loading")
     os.system("pip install -r requirements.txt")
     os.system("python preprocess_data.py")
 
