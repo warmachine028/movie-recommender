@@ -19,10 +19,10 @@ def concatenate_words(strings: list[str]) -> list[str]:
 
 
 def apply_function(movies: pd.DataFrame) -> None:
-    movies["genres"] = movies["genres"].apply(convert_to_list)
-    movies["keywords"] = movies["keywords"].apply(convert_to_list)
-    movies["cast"] = movies["cast"].apply(lambda casts: convert_to_list(casts)[:3])
-    movies["crew"] = movies["crew"].apply(
+    movies["Genres"] = movies["Genres"].apply(convert_to_list)
+    movies["Keywords"] = movies["Keywords"].apply(convert_to_list)
+    movies["Cast"] = movies["Cast"].apply(lambda casts: convert_to_list(casts)[:3])
+    movies["Crew"] = movies["Crew"].apply(
         lambda crews: [
             crew["name"]
             for crew in ast.literal_eval(crews)
@@ -33,10 +33,10 @@ def apply_function(movies: pd.DataFrame) -> None:
 
 
 def apply_concatenate(movies: pd.DataFrame) -> None:
-    movies["genres"] = movies["genres"].apply(concatenate_words)
-    movies["keywords"] = movies["keywords"].apply(concatenate_words)
-    movies["cast"] = movies["cast"].apply(concatenate_words)
-    movies["crew"] = movies["crew"].apply(concatenate_words)
+    movies["Genres"] = movies["Genres"].apply(concatenate_words)
+    movies["Keywords"] = movies["Keywords"].apply(concatenate_words)
+    movies["Cast"] = movies["Cast"].apply(concatenate_words)
+    movies["Crew"] = movies["Crew"].apply(concatenate_words)
 
 
 def apply_stemming(movies: pd.DataFrame) -> None:
@@ -47,7 +47,7 @@ def apply_stemming(movies: pd.DataFrame) -> None:
 
 
 def vectorize(movies: pd.DataFrame):
-    cv = CountVectorizer(max_features=5000, stop_words="english")
+    cv = CountVectorizer(max_features=10_000, stop_words="english")
     vectors = cv.fit_transform(movies["tags"]).toarray()
     return vectors
 
@@ -71,19 +71,20 @@ def create_new_df(movies: pd.DataFrame) -> None:
 
 
 def main():
-    credits = pd.read_csv("data/tmdb_5000_credits.csv")
-    movies = pd.read_csv("data/tmdb_5000_movies.csv")
-    data = movies.merge(credits, on="title")
-    data = data[["id", "title", "overview", "genres", "keywords", "cast", "crew"]]
+    credits = pd.read_csv("data/10000 Credits Data.csv")
+    movies = pd.read_csv("data/10000 Movies Data.csv")
+    data = movies.merge(credits, on="Movie_id")
+    data = data.loc[:, ("Movie_id", "title_x", "overview", "Genres", "Keywords", "Cast", "Crew")]
+    data.rename(columns={'Movie_id': 'id', 'title_x': 'title'}, inplace=True)
     data.dropna(inplace=True)
     apply_function(data)
     apply_concatenate(data)
     data["tags"] = (
         data["overview"]
-        + data["genres"]
-        + data["keywords"]
-        + data["cast"]
-        + data["crew"]
+        + data["Genres"]
+        + data["Keywords"]
+        + data["Cast"]
+        + data["Crew"]
     )
     create_new_df(data)
 
